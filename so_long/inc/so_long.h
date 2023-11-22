@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/21 18:39:18 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/22 12:09:02 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,40 @@ typedef struct	s_player
 /* ------------------------------------------------------- Map prse (parse.c) */
 char	**parse_map(int fd);
 char	**get_map(char *filename);
+/* ************************************************************************** */
+/*                          Gestion d'erreurs                                 */
+/* ************************************************************************** */
 /* -------------------------------------------------------- Errors (errors.c) */
-int		is_valid_charac(char c);
-int		is_valid_string(char **map);
-int		is_size_ok(char **map);
 int		is_valid_map(char **map);
-int	is_chemin_exit(char **map, int x, int y, t_player *pl);
-int	find_player(char **map, int x, int y, t_player *pl);
+/* ------------------------------------------ Errors (error_map_finishable.c) */
+void	set_tab_direction(int tab[4][2]);
+int		is_chemin_exit(char **map, int x, int y, t_player *pl);
+int		find_player(char **map, int x, int y, t_player *pl);
 int		is_finishable(char **map);
+/* --------------------------------------------- Errors (error_map_borders.c) */
+int		is_wall_valid(char **map);
+/* ----------------------------------------------- Errors (error_item_exit.c) */
+int		is_chemin_item(char **map, int x, int y, t_player *pl);
+int		is_path_items(char **map, int nb_item);
+int		is_item_exit(char **map);
+/* ************************************************************************** */
+/*                                 Utils                                      */
+/* ************************************************************************** */
+void	*ft_realloc(void *ptr, size_t size);
 
 #endif
 
-// direction = {{1, 0}, {1, 0}, {0, -1}, {0, 1}};
+/* Ft autorisees 
+open
+close
+read
+write,
+malloc
+free
+perror,
+strerror
+exit
+math.h (TOUTES)
+Fonctions de la MiniLibX
+ft_printf
+*/

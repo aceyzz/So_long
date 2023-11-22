@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 08:23:02 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/22 12:14:56 by cedmulle         ###   ########.fr       */
+/*   Created: 2023/11/22 11:45:00 by cedmulle          #+#    #+#             */
+/*   Updated: 2023/11/22 11:51:57 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int	main(int argc, char **argv)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	char	**map;
+	void	*new_ptr;
 
-	if (argc == 2)
+	new_ptr = malloc(size);
+	if (!new_ptr)
 	{
-		map = get_map(argv[1]);
-		if (!map)
-			return (1);
+		free(ptr);
+		return (NULL);
 	}
+	return (new_ptr);
 }
