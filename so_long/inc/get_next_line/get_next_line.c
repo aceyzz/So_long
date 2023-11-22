@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:09:13 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/02 14:21:46 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:16:23 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,11 @@ char	*line_extractor(char *line)
 		return (NULL);
 	while (line[i] && line[i] != '\n')
 		i++;
-	dest = (char *)malloc(i + 2);
+	dest = (char *)malloc(i + 1);
 	if (!dest)
 		return (NULL);
 	i = 0;
 	while (line[i] && line[i] != '\n')
-	{
-		dest[i] = line[i];
-		i++;
-	}
-	if (line[i] == '\n')
 	{
 		dest[i] = line[i];
 		i++;

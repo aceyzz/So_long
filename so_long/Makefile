@@ -1,0 +1,102 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/21 08:25:32 by cedmulle          #+#    #+#              #
+#    Updated: 2023/11/22 16:46:47 by cedmulle         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# ---------------------------------------------------------------------------- #
+#                                 Variables                                    #
+# ---------------------------------------------------------------------------- #
+# ------ EXECUTABLES ------ #
+NAME		= so_long
+# ------ DIRECTORIES ------ #
+INC			= inc/
+OBJ_DIR		= obj/
+# ----- SOURCES FILES ----- #
+SRC_DIR		= src/
+SRC			= $(wildcard $(SRC_DIR)*.c)
+OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)so_long/%.o,$(SRC))
+# ------- FT_PRINTF ------- #
+PF_DIR		= inc/ft_printf/
+PF_SRC		= $(wildcard $(PF_DIR)*.c)
+PF_OBJ		= $(patsubst $(PF_DIR)%.c,$(OBJ_DIR)ft_printf/%.o,$(PF_SRC))
+PF_LIB		= libftprintf.a
+# ------- GNL ------- #
+GL_DIR		= inc/get_next_line/
+GL_SRC		= $(wildcard $(GL_DIR)*.c)
+GL_OBJ		= $(patsubst $(GL_DIR)%.c,$(OBJ_DIR)get_next_line/%.o,$(GL_SRC))
+GL_LIB		= libgnl.a
+# ------ COMPILATION ------ #
+CC			= gcc
+CFLAGS		= -Wall -Werror -Wextra -I
+LDFLAGS		= -L./lib -lftprintf -lgnl
+RM			= rm -f
+
+# ---------------------------------------------------------------------------- #
+#                                 Fonctions                                    #
+# ---------------------------------------------------------------------------- #
+# Règle générale ------------------------------------------------------------- #
+all:
+				@echo "\033[1;34mLoading...\033[0m"
+				@$(MAKE) $(NAME) $(PF_LIB) $(GL_LIB) > /dev/null
+				@echo "\033[1;36mCompilation of \"$(NAME)\" successful √\033[0m"
+				@echo "\033[1;36mCompilation of \"$(GL_LIB)\" successful √\033[0m"
+				@echo "\033[1;36mCompilation of \"$(PF_LIB)\" successful √\033[0m"
+
+# Création de l'éxécutable client -------------------------------------------- #
+$(NAME): 		$(OBJ) $(PF_LIB) $(GL_LIB)
+				@$(CC) $(CFLAGS) $(INC) $(OBJ) -o $(NAME) $(LDFLAGS)
+
+# Création librairie ft_printf ----------------------------------------------- #
+$(PF_LIB):		$(PF_OBJ)
+				@ar rc $(PF_LIB) $(PF_OBJ)
+				@ranlib $(PF_LIB)
+				@mkdir -p ./lib/
+				@mv $(PF_LIB) ./lib/
+				
+# Création librairie gnl ----------------------------------------------------- #
+$(GL_LIB):		$(GL_OBJ)
+				@ar rc $(GL_LIB) $(GL_OBJ)
+				@ranlib $(GL_LIB)
+				@mkdir -p ./lib/
+				@mv $(GL_LIB) ./lib/
+				
+# Création des fichiers objets executables ----------------------------------- #
+$(OBJ_DIR)so_long/%.o:	$(SRC_DIR)%.c 
+				@mkdir -p $(@D)
+				@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+# Création des fichiers objets printf ---------------------------------------- #
+$(OBJ_DIR)ft_printf/%.o:	$(PF_DIR)%.c 
+				@mkdir -p $(@D)
+				@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+# Création des fichiers objets printf ---------------------------------------- #
+$(OBJ_DIR)get_next_line/%.o:	$(GL_DIR)%.c 
+				@mkdir -p $(@D)
+				@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+# Suppression fichiers objets ------------------------------------------------ #
+clean:
+				@$(RM) -r $(OBJ_DIR)
+				@echo "\033[1;35mAll objects files succesfully deleted √\033[0m"
+
+# Suppression fichiers objets + éxécutables + librairie printf --------------- #
+fclean: 		clean
+				@$(RM) $(NAME)
+				@$(RM) -r ./lib
+				@echo "\033[1;35m${NAME}, ${GL_LIB} and ${PF_LIB} succesfully deleted √\033[0m"
+
+# Suppression fichiers objets + éxécutables + librairie printf + recompile --- #
+re: 			fclean all
+
+# Bonus inclus dans les fichiers de base ------------------------------------- #
+bonus:			all
+
+.PHONY: 		start all clean fclean re

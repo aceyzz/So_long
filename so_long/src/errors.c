@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:12:05 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/22 12:14:15 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:51:01 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,48 +19,60 @@ static int	is_valid_charac(char c)
 	return (0);
 }
 
-static int	is_valid_string(char **map)
+static int	is_valid_string(t_info *info)
 {
 	int	i;
 	int	k;
 
 	i = 0;
-	while (map[i])
+	while (info->map_copy[i])
 	{
 		k = 0;
-		while (map[i][k] && is_valid_charac(map[i][k]))
+		while (info->map_copy[i][k] && is_valid_charac(info->map_copy[i][k]))
+		{
+			if (info->map_copy[i][k] == 'P')
+			{
+				info->pl_x = k;
+				info->pl_y = i;
+			}
 			k++;
+		}
 		i++;
 	}
-	if (!map[i])
+	if (!info->map_copy[i])
 		return (1);
 	return (0);
 }
 
-static int	is_size_ok(char **map)
+static int	is_size_ok(t_info *info)
 {
 	int		i;
 
 	i = 0;
-	while (map[i])
+	if (!info->map_copy[i])
+		return (0);
+	while (info->map_copy[i + 1])
 	{
-		if (ft_strlen(map[i - 1]) != ft_strlen(map[i]))
+		if (ft_strlen(info->map_copy[i]) != ft_strlen(info->map_copy[i + 1]))
 			return (0);
 		i++;
 	}
-	if ((i < 3 || ft_strlen(map[i - 1]) < 3)
-		|| ((i == 3 && ft_strlen(map[i] == 3))))
+	info->size_x = ft_strlen(info->map_copy[i]);
+	info->size_y = i - 1;
+	if ((i < 3 || ft_strlen(info->map_copy[i - 1]) < 3)
+		|| ((i == 3 && ft_strlen(info->map_copy[i - 1]) == 3)))
 		return (0);
 	else
 		return (1);
 }
 
-int	is_valid_map(char **map)
+int	is_valid_map(t_info *info)
 {
-	if (!is_size_ok(map)|| !is_valid_string(map) || !is_wall_valid(map)
-		|| !is_item_exit(map))
+	if (!is_size_ok(info)|| !is_valid_string(info)
+		|| !is_wall_valid(info) || !is_item_exit(info))
+	{
+		//ft_printf("1: %d\n2: %d\n3: %d\n4: %d\n", is_size_ok(info), is_valid_string(info), is_wall_valid(info), is_item_exit(info));
 		return (0);
-	if (!is_finishable(map))
-		return (0);
+	}
 	return (1);
 }

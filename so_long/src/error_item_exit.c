@@ -6,92 +6,91 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 10:30:35 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/22 11:35:33 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:06:36 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int is_chemin_item(char **map, int x, int y, t_player *pl)
+static int	is_valid_ways(int y, int x, t_info *info)
 {
-	int	i;
-	int	direction[4][2];
-	int	new_row;
-	int	new_col;
+	int	res;
 
-	set_tab_direction(direction);
-	while (pl->row >= 0 && pl->col >= 0 && pl->row < x && pl->col < y)
-	{
-		if (map[pl->row][pl->col] == 'V' || map[pl->row][pl->col] == '1')
-			return (0);
-		map[pl->row][pl->col] = 'V';
-		if (map[pl->row][pl->col] == 'C')
-			return (1);
-		i = 0;
-		while (i < 4)
-		{
-			new_row = pl->row + direction[i][0];
-			new_col = pl->col + direction[i][1];
-			if (is_chemin_item(map, x, y, &(t_player){new_row, new_col}))
-				return (1);
-			i++;
-		}
-	}
-	return (0);
-}
-
-int	is_path_items(char **map, int nb_item)
-{
-	t_player	*pl;
-	int			s_x;
-	int			s_y;
-
-	s_x = 0;
-	s_y = ft_strlen(map[s_x]);
-	while (map[s_x])
-		s_x++;
-	pl = malloc(sizeof(t_player));
-	if (!pl)
+	res = 0;
+	if (y >= info->size_y || x >= info->size_x || y <= 0 || x <= 0
+		|| info->map_copy[y][x] == '1' || info->map_copy[y][x] == '2')
 		return (0);
-	pl->row = 0;
-	pl->col = 0;
-	while (nb_item > 0)
+	else if (info->map_copy[y][x] == 'E')
+		return (1);
+	else if (info->map_copy[y][x] == 'C')
 	{
-		if (!is_chemin_item(map, s_x, s_y, pl))
-		{
-			free(pl);
-			return (0);
-		}
-		nb_item--;
+		info->map_copy[y][x] = '0';
+		x = info->pl_x;
+		y = info->pl_y;
+		info->nb_coin--;
 	}
-	free(pl);
-	return (1);
+	info->map_copy[y][x] = '2';
+	res += is_valid_ways(y, x + 1, info);
+	res += is_valid_ways(y, x - 1, info);
+	res += is_valid_ways(y + 1, x, info);
+	res += is_valid_ways(y - 1, x, info);
+	return (res);
 }
+/*
+static int	is_way(int y, int x, int *coin, t_game *info)
+{
+	int	res;
 
-int	is_item_exit(char **map)
+	res = 0;
+	if (y >= info->y || x >= info->x || y < 0 || x < 0
+		|| info->map_copy[y][x] == '1' || info->map_copy[y][x] == '2')
+		return (0);
+	else if (info->map_copy[y][x] == 'E')
+		return (1);
+	else if (info->map_copy[y][x] == 'C')
+		*coin += 1;
+	info->map_copy[y][x] = '2';
+	res += is_way(y + 1, x, coin, info);
+	res += is_way(y - 1, x, coin, info);
+	res += is_way(y, x + 1, coin, info);
+	res += is_way(y, x - 1, coin, info);
+	return (res);
+}
+*/
+int	is_item_exit(t_info *info)
 {
 	int	i;
 	int	k;
-	int	flag_c;
-	int	flag_e;
 
 	i = 0;
-	flag_e = 0;
-	flag_c = 0;
-	while (map[i])
+	info->nb_exit = 0;
+	info->nb_coin = 0;
+	while (info->map_copy[i])
 	{
 		k = 0;
-		while (map[i][k])
+		while (info->map_copy[i][k])
 		{
-			if (map[i][k] == 'C')
-				flag_c++;
-			if (map[i][k] == 'E')
-				flag_e++;
+			if (info->map_copy[i][k] == 'C')
+				(info)->nb_coin++;
+			if (info->map_copy[i][k] == 'E')
+				(info)->nb_exit++;
 			k++;
 		}
 		i++;
 	}
-	if (flag_c > 0 && flag_e == 1 && is_path_items(map, flag_c))
-		return (1);
+	if (info->nb_coin > 0 && info->nb_exit == 1)
+	{
+		info->copy_coin = info->nb_coin;
+		ft_printf("coin : %d\n", info->nb_coin);
+		ft_printf("copy : %d\n", info->copy_coin);
+		if (is_valid_ways(info->pl_y, info->pl_x, info))
+		{
+			ft_printf("Oui\n");
+			return (1);
+		}
+		ft_printf("coin : %d\n", info->nb_coin);
+		ft_printf("copy : %d\n", info->copy_coin);
+	}
+	ft_printf("Non\n");
 	return (0);
 }

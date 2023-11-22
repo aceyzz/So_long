@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:12:45 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/22 12:14:17 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/22 17:07:56 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,18 @@ char	**parse_map(int fd)
 	i = 0;
 	map = (char **)malloc(sizeof(char *) * 1);
 	if (!map)
-		check_and_exit(map, 1);
+		return (NULL);
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (!line)
 			break;
-		map = (char **)ft_realloc(map, sizeof(char *) * (i + 2));
+		map = (char **)realloc(map, sizeof(char *) * (i + 2));
 		if (!map)
-			check_and_exit(map, 1);
+		{
+			free(line);
+			exit(1);
+		}
 		map[i] = line;
 		i++;
 	}
@@ -37,32 +40,46 @@ char	**parse_map(int fd)
 	return (map);
 }
 
-void	check_and_exit(char **map, int flag)
+char	**ft_tabdup(char **tab)
 {
-	if (flag == 1)
-		perror("Error:\nAllocation mémoire (map) échouée.\n");
-	else
+	char	**dest;
+	int		i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	dest = (char **)malloc(sizeof(char *) * i + 1);
+	if (!dest)
+		return (NULL);
+	i = 0;
+	while (tab[i])
 	{
-		free(map);
-		perror("Error:\nMap invalide.\n");
+		dest[i] = ft_strdup(tab[i]);
+		i++;
 	}
-	exit(1);
+	dest[i] = NULL;
+	return (dest);
 }
 
 char	**get_map(char *filename)
 {
 	int		fd;
 	char	**map;
+	t_info	info;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		perror("Error:\nOuverture de fichier.\n");
+		perror("Error: Ouverture de fichier.\n");
 		exit(1);
 	}
 	map = parse_map(fd);
-	if (!is_valid_map(map))
-		check_and_exit(map, 0);
+	(&info)->map_copy = ft_tabdup(map);
+	if (!is_valid_map(&info))
+	{
+		perror("Erreur dans la map\n");
+		exit(1);
+	}
 	close(fd);
-	return (map);
+	return ((&info)->map_copy);
 }
