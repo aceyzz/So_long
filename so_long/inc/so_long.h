@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/23 16:11:27 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:14:53 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <math.h>
 # include "get_next_line/get_next_line.h"
 # include "ft_printf/ft_printf.h"
-# include "mlx/mlx.h"
+# include "../inc/mlx/mlx.h"
 
 typedef struct	s_game
 {

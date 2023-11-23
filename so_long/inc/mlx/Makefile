@@ -18,7 +18,7 @@ all: 		$(NAME)
 $(NAME):	$(OBJ)
 			@ar -r $(NAME) $(OBJ)
 			@ranlib $(NAME)
-			@echo "\033[1;36m\"$(NAME)\"\tcompiled\t√\033[0m"
+			@mv $(NAME) ../../lib/
 
 clean:
 			@rm -f $(NAME) $(OBJ) *~

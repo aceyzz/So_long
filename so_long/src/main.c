@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:23:02 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/23 14:23:23 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:15:09 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	main(int argc, char *argv[])
 	{
 		if (!init_args(&info, argv[1]) || !parse_map(&info))
 			return (1);
+		// lets go !
 	}
 	else
 		ft_printf("Usage : <./so_long> <filename.ber>\n");

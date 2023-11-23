@@ -6,7 +6,7 @@
 #    By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 08:25:32 by cedmulle          #+#    #+#              #
-#    Updated: 2023/11/23 16:11:23 by cedmulle         ###   ########.fr        #
+#    Updated: 2023/11/23 16:38:04 by cedmulle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ MX_LIB		= libmlx.a
 # ------ COMPILATION ------ #
 CC			= gcc
 CFLAGS		= -Wall -Werror -Wextra -I
-LDFLAGS		= -L./lib -lftprintf -lgnl
+LDFLAGS		= -L./lib -lftprintf -lgnl -lmlx -framework OpenGL -framework AppKit
 RM			= rm -f
 
 # ---------------------------------------------------------------------------- #
