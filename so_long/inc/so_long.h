@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/22 18:00:23 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:19:09 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,35 +23,25 @@
 # include "ft_printf/ft_printf.h"
 //# include "../inc/MLX42/include/MLX42/MLX42.h"
 
-typedef struct	s_info
+typedef struct	s_game
 {
-	int		size_x;
-	int		size_y;
+	int		fd;
+	char	**map;
+	char	**map_copy;
+	char	*name_map;
+	int		x;
+	int		y;
 	int		pl_x;
 	int		pl_y;
-	int		nb_coin;
-	int		copy_coin;
-	int		nb_exit;
-	char	**map_copy;
-}				t_info;
+	int		path_start[2];
+	int		path_end[2];
+	int		max_coin;
+	int		coin;
+}				t_game;
 
-/* ------------------------------------------------------- Map prse (parse.c) */
-char	**parse_map(int fd);
-char	**get_map(char *filename);
-/* ************************************************************************** */
-/*                          Gestion d'erreurs                                 */
-/* ************************************************************************** */
-/* -------------------------------------------------------- Errors (errors.c) */
-int		is_valid_map(t_info *info);
-/* --------------------------------------------- Errors (error_map_borders.c) */
-int		is_wall_valid(t_info *info);
-/* ----------------------------------------------- Errors (error_item_exit.c) */
-int		is_item_exit(t_info *info);
-/* ************************************************************************** */
-/*                                 Utils                                      */
-/* ************************************************************************** */
-void	*ft_realloc(void *ptr, size_t size);
-char	*ft_strdup(const char *s1);
+int		parse_map(t_game *info);
+int		ft_error(int error);
+int		ft_free_info(t_game *info);
 
 #endif
 

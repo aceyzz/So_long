@@ -6,28 +6,42 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:23:02 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/22 16:49:43 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:23:23 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
 
-int	main(int argc, char **argv)
+static int	init_args(t_game *info, char *av)
 {
-	char	**map;
-	int		i;
+	int	i;
 
 	i = 0;
+	while (av[i])
+		i++;
+	if (av[i - 1] != 'r' || av[i - 2] != 'e'
+		|| av[i - 3] != 'b' || av[i - 4] != '.')
+		return (ft_error(11));
+	info->fd = open(av, O_RDONLY);
+	if (info->fd == -1)
+		return (ft_error(1));
+	info->name_map = av;
+	info->x = 0;
+	info->y = 0;
+	info->coin = 0;
+	return (1);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_game	info;
+
 	if (argc == 2)
 	{
-		map = get_map(argv[1]);
-		if (!map)
+		if (!init_args(&info, argv[1]) || !parse_map(&info))
 			return (1);
-		while (map[i])
-		{
-			ft_printf("%s", map[i]);
-			i++;
-		}
 	}
+	else
+		ft_printf("Usage : <./so_long> <filename.ber>\n");
 	return (0);
 }
