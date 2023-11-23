@@ -6,7 +6,7 @@
 #    By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 08:25:32 by cedmulle          #+#    #+#              #
-#    Updated: 2023/11/22 16:46:47 by cedmulle         ###   ########.fr        #
+#    Updated: 2023/11/23 14:34:53 by cedmulle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,10 @@ RM			= rm -f
 all:
 				@echo "\033[1;34mLoading...\033[0m"
 				@$(MAKE) $(NAME) $(PF_LIB) $(GL_LIB) > /dev/null
-				@echo "\033[1;36mCompilation of \"$(NAME)\" successful √\033[0m"
-				@echo "\033[1;36mCompilation of \"$(GL_LIB)\" successful √\033[0m"
-				@echo "\033[1;36mCompilation of \"$(PF_LIB)\" successful √\033[0m"
+				@echo "\033[1;36mObject files\tcreated \t√\033[0m"
+				@echo "\033[1;36m\"$(NAME)\"\tcompiled\t√\033[0m"
+				@echo "\033[1;36m\"$(GL_LIB)\"\tcompiled\t√\033[0m"
+				@echo "\033[1;36m\"$(PF_LIB)\"\tcompiled\t√\033[0m"
 
 # Création de l'éxécutable client -------------------------------------------- #
 $(NAME): 		$(OBJ) $(PF_LIB) $(GL_LIB)
@@ -85,13 +86,15 @@ $(OBJ_DIR)get_next_line/%.o:	$(GL_DIR)%.c
 # Suppression fichiers objets ------------------------------------------------ #
 clean:
 				@$(RM) -r $(OBJ_DIR)
-				@echo "\033[1;35mAll objects files succesfully deleted √\033[0m"
+				@echo "\033[1;35mObject files deleted \t\t√\033[0m"
 
 # Suppression fichiers objets + éxécutables + librairie printf --------------- #
 fclean: 		clean
 				@$(RM) $(NAME)
 				@$(RM) -r ./lib
-				@echo "\033[1;35m${NAME}, ${GL_LIB} and ${PF_LIB} succesfully deleted √\033[0m"
+				@echo "\033[1;35m\"${NAME}\" file deleted\t\t√\033[0m"
+				@echo "\033[1;35m\"${GL_LIB}\" file deleted\t\t√\033[0m"
+				@echo "\033[1;35m\"${PF_LIB}\" file deleted\t√\033[0m"
 
 # Suppression fichiers objets + éxécutables + librairie printf + recompile --- #
 re: 			fclean all
