@@ -1,5 +1,0 @@
-loading :	500*500px
-Enemy : 	25*25px
-Coin :		25*25px
-Wall :		25*25px
-Player :	25*25px
