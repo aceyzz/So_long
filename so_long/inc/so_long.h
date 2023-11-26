@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/25 16:04:14 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 13:46:02 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@
 # define RATIO 1
 # define KEY_ENTER 36
 # define KEY_ESCAPE 53
-# define KEY_UP 13
-# define KEY_DOWN 1
-# define KEY_LEFT 0
-# define KEY_RIGHT 2
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
 # define KEY_PRESS_EVENT 2
 # define KEY_RELEASE_EVENT 3
 # define BOARD 200
@@ -84,12 +84,14 @@ typedef struct s_game
 int		parse_map(t_game *info);
 int		ft_error(int error);
 int		ft_free_info(t_game *info);
-void	loading_screen(t_game *game);
 int		handle_keypress(int keycode, t_game *game);
 void	launch_screen(t_game *game);
-void	draw_map(t_game *game);
-void	draw_killer(t_game *game, int i, int j, int color);
-void	draw_player(t_game *game, int i, int j);
+void	draw_map(t_game *game, char direction);
+void	move_player(int keycode, t_game *game);
+void	finish_game(t_game *game, int result);
+char	*ft_itoa(int nb);
+void	draw_move_board(t_game *game);
+void	draw_coin_board(t_game *game);
 
 #endif
 

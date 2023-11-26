@@ -6,11 +6,37 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:42:29 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/25 15:55:33 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 11:54:43 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+char	*ft_itoa(int nb)
+{
+	char	*str;
+	int		i;
+	int		n;
+
+	n = nb;
+	i = 0;
+	while (n > 0)
+	{
+		n /= 10;
+		i++;
+	}
+	str = malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	str[i] = '\0';
+	while (i > 0)
+	{
+		str[i - 1] = nb % 10 + '0';
+		nb /= 10;
+		i--;
+	}
+	return (str);
+}
 
 int	ft_free_info(t_game *info)
 {
