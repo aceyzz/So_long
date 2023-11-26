@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:33:38 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 13:49:37 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 13:59:04 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	draw_board(t_game *game)
 {
 	draw_move_board(game);
 	draw_coin_board(game);
+	draw_coin_board_max(game);
 	game->img = mlx_xpm_file_to_image(game->mlx, "./img/board.xpm",
 			&(game->size), &(game->size));
 	mlx_put_image_to_window(game->mlx, game->win, game->img,

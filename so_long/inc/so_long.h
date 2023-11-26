@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 13:46:02 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:51:45 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	finish_game(t_game *game, int result);
 char	*ft_itoa(int nb);
 void	draw_move_board(t_game *game);
 void	draw_coin_board(t_game *game);
+void	draw_coin_board_max(t_game *game);
+void	print_final_score(t_game *game);
 
 #endif
 

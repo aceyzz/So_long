@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:25:09 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 13:22:51 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:51:45 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ static void	ending_screen(t_game *game, int result)
 	else
 		game->img = mlx_xpm_file_to_image(game->mlx, "./img/lose.xpm",
 				&game->size, &game->size);
-	game->addr = (int *)mlx_get_data_addr(game->img, &game->bpp, \
-			&game->line_len, &game->endian);
 	game->window_width = game->x * 100;
 	game->window_height = game->y * 100;
 	game->image_width = game->size;
@@ -35,6 +33,7 @@ static void	ending_screen(t_game *game, int result)
 	game->y_offset = (game->window_height - game->image_height) / 2;
 	mlx_put_image_to_window(game->mlx, game->win, game->img,
 		game->x_offset, game->y_offset);
+	print_final_score(game);
 }
 
 static void	loading_screen(t_game *game)
