@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 19:35:12 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 20:25:44 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:57:49 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 /* it verify the next FLOOR character, and move onto it */
 
 #include "../inc/so_long.h"
-
-static int	get_random_direction()
-{
-	return floor(rand() % 4);
-}
 
 static void	move_right(t_game *game, int i, int j)
 {
@@ -71,13 +66,13 @@ void	move_all_killers(t_game *game)
 		{
 			if (game->map[i][j] == KILLER)
 			{
-				if (get_random_direction() == 0)
+				if (floor(rand() % 4) == 0)
 					move_right(game, i, j);
-				else if (get_random_direction() == 1)
+				else if (floor(rand() % 4) == 1)
 					move_left(game, i, j);
-				else if (get_random_direction() == 2)
+				else if (floor(rand() % 4) == 2)
 					move_down(game, i, j);
-				else if (get_random_direction() == 3)
+				else if (floor(rand() % 4) == 3)
 					move_up(game, i, j);
 			}
 			j++;

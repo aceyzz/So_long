@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:42:29 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 19:16:53 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:58:34 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ int	ft_error(int error)
 	return (0);
 }
 
-void create_tab_killers(t_game *game)
+void	create_tab_killers(t_game *game)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	k = 0;
