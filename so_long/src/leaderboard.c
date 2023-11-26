@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 13:26:07 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 14:51:43 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:56:46 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ void	print_final_score(t_game *game)
 	offset[0] = game->x_offset + game->image_width - 250;
 	offset[1] = game->y_offset + game->image_height - 77;
 	moves = ft_itoa(game->moves);
-	mlx_string_put(game->mlx, game->win, offset[0], offset[1], 0x00FFFF00, moves);
+	mlx_string_put(game->mlx, game->win, offset[0], offset[1],
+		0x00FFFF00, moves);
 	free(moves);
 	offset[0] = game->x_offset + game->image_width - 250;
 	offset[1] = game->y_offset + game->image_height - 27;
 	coins = ft_itoa(game->coin_collected);
-	mlx_string_put(game->mlx, game->win, offset[0], offset[1], 0x00FFFF00, coins);
+	mlx_string_put(game->mlx, game->win, offset[0], offset[1],
+		0x00FFFF00, coins);
 	free(coins);
 }
 
@@ -69,7 +71,7 @@ void	draw_coin_board_max(t_game *game)
 	offset[1] = 180;
 	str = ft_itoa(game->max_coin);
 	mlx_string_put(game->mlx, game->win, offset[0] - 13,
-			offset[1], 0x0000FFFF, "\\ ");
+		offset[1], 0x0000FFFF, "\\ ");
 	mlx_string_put(game->mlx, game->win, offset[0], offset[1], 0x0000FFFF, str);
 	free(str);
 }

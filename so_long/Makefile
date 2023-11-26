@@ -6,7 +6,7 @@
 #    By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 08:25:32 by cedmulle          #+#    #+#              #
-#    Updated: 2023/11/23 16:38:04 by cedmulle         ###   ########.fr        #
+#    Updated: 2023/11/26 15:05:27 by cedmulle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -111,5 +111,8 @@ re: 			fclean all
 
 # Bonus inclus dans les fichiers de base ------------------------------------- #
 bonus:			all
+
+norme:
+				@python3 -m norminette -R CheckDefine $(SRC) $(INC)so_long.h $(PF_DIR) $(GL_DIR)
 
 .PHONY: 		start all clean fclean re

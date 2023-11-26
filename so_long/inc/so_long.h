@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 14:51:45 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:58:14 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,27 +46,27 @@
 
 typedef struct s_game
 {
-	int		fd; // file descriptor
-	char	**map; // map originale
-	char	**map_copy; // pour trouver path valide
-	char	*name_map; // nom du fichier
-	int		x; // largeur de la map
-	int		y; // hauteur de la map
-	int		pl_x; // position du joueur
-	int		pl_y; // position du joueur
-	int		exit_x; // position de la sortie
-	int		exit_y; // position de la sortie
-	int		path_start[2]; 
+	int		fd;
+	char	**map;
+	char	**map_copy;
+	char	*name_map;
+	int		x;
+	int		y;
+	int		pl_x;
+	int		pl_y;
+	int		exit_x;
+	int		exit_y;
+	int		path_start[2];
 	int		path_end[2];
-	int		max_coin; // nombre d'items
-	int		coin; // nombre d'items pour check
-	int		coin_collected; // nombre d'items collectés
-	int		started; // 0 si le jeu n'a pas commencé, 1 sinon
-	void	*mlx; // mlx: pointeur sur la connexion avec le serveur graphique
-	void	*win; // fenetre
+	int		max_coin;
+	int		coin;
+	int		coin_collected;
+	int		started;
+	void	*mlx;
+	void	*win;
 	void	*img;
 	int		*addr;
-	int		bpp; 
+	int		bpp;
 	int		line_len;
 	int		endian;
 	int		size;
@@ -74,12 +74,11 @@ typedef struct s_game
 	int		window_height;
 	int		image_width;
 	int		image_height;
-	int		x_offset; // pour trouver le centre de l'image
-	int		y_offset; // pour trouver le centre de l'image
+	int		x_offset;
+	int		y_offset;
 	int		moves;
 	int		finished;
 }				t_game;
-
 
 int		parse_map(t_game *info);
 int		ft_error(int error);
