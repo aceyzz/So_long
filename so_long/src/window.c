@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:25:09 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 14:51:45 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:52:11 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,14 @@ void	launch_screen(t_game *game)
 {
 	game->started = 0;
 	game->finished = 0;
+	game->moves = 0;
+	game->coin_collected = 0;
+	create_tab_killers(game);
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, (game->x * 100) + BOARD,
 			game->y * 100, "SO_LONG - PACMAN by cedmulle");
 	loading_screen(game);
 	mlx_hook(game->win, KEY_PRESS_EVENT, 0, handle_keypress, game);
+	mlx_mouse_hide();
 	mlx_loop(game->mlx);
 }

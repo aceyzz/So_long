@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 14:58:14 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:56:36 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_game
 	int		y_offset;
 	int		moves;
 	int		finished;
+	int		nb_killers;
+	int		**tab_killers;
 }				t_game;
 
 int		parse_map(t_game *info);
@@ -93,6 +95,9 @@ void	draw_move_board(t_game *game);
 void	draw_coin_board(t_game *game);
 void	draw_coin_board_max(t_game *game);
 void	print_final_score(t_game *game);
+void	create_tab_killers(t_game *game);
+void		move_all_killers(t_game *game);
+
 
 #endif
 

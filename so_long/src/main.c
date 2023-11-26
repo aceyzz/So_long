@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:23:02 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/24 15:55:28 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:56:40 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	init_args(t_game *info, char *av)
 	info->x = 0;
 	info->y = 0;
 	info->coin = 0;
+	info->nb_killers = 0;
 	return (1);
 }
 

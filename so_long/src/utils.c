@@ -6,11 +6,24 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:42:29 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 11:54:43 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:16:53 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
+
+static void	free_killers(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (game->tab_killers[i])
+	{
+		free(game->tab_killers[i]);
+		i++;
+	}
+	free(game->tab_killers);
+}
 
 char	*ft_itoa(int nb)
 {
@@ -53,6 +66,8 @@ int	ft_free_info(t_game *info)
 		free(info->map);
 		free(info->map_copy);
 	}
+	i = 0;
+	free_killers(info);
 	return (0);
 }
 
@@ -81,4 +96,32 @@ int	ft_error(int error)
 	else if (error == 11)
 		ft_printf("File error: extension non reconnue.\n");
 	return (0);
+}
+
+void create_tab_killers(t_game *game)
+{
+	int i;
+	int j;
+	int k;
+
+	i = 0;
+	k = 0;
+	game->tab_killers = malloc(sizeof(int *) * (game->nb_killers + 1));
+	while (game->map[i])
+	{
+		j = 0;
+		while (game->map[i][j])
+		{
+			if (game->map[i][j] == KILLER)
+			{
+				game->tab_killers[k] = malloc(sizeof(int) * 2);
+				game->tab_killers[k][0] = i;
+				game->tab_killers[k][1] = j;
+				k++;
+			}
+			j++;
+		}
+		i++;
+	}
+	game->tab_killers[k] = NULL;
 }

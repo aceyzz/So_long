@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:05:07 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 11:12:42 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:56:47 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	handle_keypress(int keycode, t_game *game)
 		mlx_destroy_image(game->mlx, game->img);
 		mlx_clear_window(game->mlx, game->win);
 		game->started = 1;
-		game->moves = 0;
 		draw_map(game, 'Q');
 	}
 	if (keycode == KEY_ESCAPE)

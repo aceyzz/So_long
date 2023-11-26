@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:27:48 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/25 16:02:53 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:51:55 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static int	is_valid_charac(t_game *info, int i, int j)
 		info->path_end[0] = i;
 		info->path_end[1] = j;
 	}
+	if (info->map[i][j] == 'x')
+		info->nb_killers++;
 	return (1);
 }
 
