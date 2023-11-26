@@ -1,4 +1,4 @@
-<img src=".utils/SO_LONG.png" alt="logo-so_long" style="width: 100%">
+<img src="git_utils/SO_LONG.png" alt="logo-so_long" style="width: 100%">
 
 <br>
 <br>
