@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/27 14:58:10 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:17:29 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 # define KEY_DOWN 125
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
+# define KEY_S 1
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_D 2
 # define KEY_PRESS_EVENT 2
 # define KEY_RELEASE_EVENT 3
 # define BOARD 200

@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:05:07 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/27 14:21:52 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:14:56 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ int	handle_keypress(int keycode, t_game *game)
 	}
 	if (game->started == 1 && game->finished == 0)
 	{
-		if (keycode == KEY_RIGHT || keycode == KEY_LEFT
-			|| keycode == KEY_UP || keycode == KEY_DOWN)
+		if (keycode == KEY_RIGHT || keycode == KEY_LEFT || keycode == KEY_UP
+			|| keycode == KEY_DOWN || keycode == KEY_W || keycode == KEY_A
+			|| keycode == KEY_S || keycode == KEY_D)
 			move_player(keycode, game);
 	}
 	return (0);

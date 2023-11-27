@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 09:55:42 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 20:28:01 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:17:32 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,12 @@ static void	move_left(t_game *game)
 
 void	move_player(int keycode, t_game *game)
 {
-	if (keycode == KEY_RIGHT)
+	if (keycode == KEY_RIGHT || keycode == KEY_D)
 		move_right(game);
-	if (keycode == KEY_LEFT)
+	if (keycode == KEY_LEFT || keycode == KEY_A)
 		move_left(game);
-	if (keycode == KEY_UP)
+	if (keycode == KEY_UP || keycode == KEY_W)
 		move_up(game);
-	if (keycode == KEY_DOWN)
+	if (keycode == KEY_DOWN || keycode == KEY_S)
 		move_down(game);
 }
