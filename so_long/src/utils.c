@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:42:29 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/27 14:47:26 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:58:07 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,48 +91,4 @@ void	create_tab_killers(t_game *game)
 		i++;
 	}
 	game->tab_killers[k] = NULL;
-}
-
-static void	duplicate_tab(t_game *game)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	game->map_copy = malloc(sizeof(char *) * (game->y + 1));
-	if (!game->map_copy)
-		ft_error(9);
-	while (i < game->y)
-	{
-		j = 0;
-		game->map_copy[i] = malloc(sizeof(char) * (game->x + 1));
-		if (!game->map_copy[i])
-			ft_error(9);
-		while (j < game->x)
-		{
-			game->map_copy[i][j] = game->map[i][j];
-			j++;
-		}
-		game->map_copy[i][j] = '\0';
-		i++;
-	}
-	game->map_copy[i] = NULL;
-}
-
-void	parse_map_origin(t_game *info)
-{
-	int	i;
-
-	i = 0;
-	info->map = malloc(sizeof(char *) * (info->y + 1));
-	if (!info->map)
-		ft_error(9);
-	while (1)
-	{
-		info->map[i] = get_next_line(info->fd);
-		if (info->map[i] == NULL)
-			break ;
-		i++;
-	}
-	duplicate_tab(info);
 }
