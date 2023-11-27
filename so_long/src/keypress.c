@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:05:07 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 19:56:47 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:21:52 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	handle_keypress(int keycode, t_game *game)
 	}
 	if (keycode == KEY_ESCAPE)
 	{
-		mlx_destroy_window(game->mlx, game->win);
 		ft_free_info(game);
 		exit(0);
 	}

@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:27:48 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 19:51:55 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:21:51 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ static int	get_size(t_game *info)
 	}
 	if ((info->x < 3 || info->y < 3) || (info->x + info->y) < 7)
 		return (ft_error(5));
-	if (info->x == info->y)
-		return (ft_error(4));
 	close(info->fd);
 	info->fd = open(info->name_map, O_RDONLY);
 	return (1);

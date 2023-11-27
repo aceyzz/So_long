@@ -6,24 +6,11 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:42:29 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 20:58:34 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:21:26 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/so_long.h"
-
-static void	free_killers(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	while (game->tab_killers[i])
-	{
-		free(game->tab_killers[i]);
-		i++;
-	}
-	free(game->tab_killers);
-}
 
 char	*ft_itoa(int nb)
 {
@@ -49,26 +36,6 @@ char	*ft_itoa(int nb)
 		i--;
 	}
 	return (str);
-}
-
-int	ft_free_info(t_game *info)
-{
-	int	i;
-
-	i = -1;
-	while (++i < info->y)
-	{
-		free(info->map_copy[i]);
-		free(info->map[i]);
-	}
-	if (info->map)
-	{
-		free(info->map);
-		free(info->map_copy);
-	}
-	i = 0;
-	free_killers(info);
-	return (0);
 }
 
 int	ft_error(int error)
