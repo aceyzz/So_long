@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:27:48 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/27 14:21:51 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:49:27 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,19 +115,9 @@ int	parse_map(t_game *info)
 	i = -1;
 	if (!get_size(info))
 		return (0);
-	info->map = malloc(sizeof(char *) * (info->y + 1));
-	info->map_copy = malloc(sizeof(char *) * (info->y + 1));
+	parse_map_origin(info);
 	if (!info->map || !info->map_copy)
 		return (ft_error(9));
-	info->map[info->y] = NULL;
-	info->map_copy[info->y] = NULL;
-	while (++i < info->y)
-		info->map[i] = get_next_line(info->fd);
-	i = -1;
-	close(info->fd);
-	info->fd = open(info->name_map, O_RDONLY);
-	while (++i < info->y)
-		info->map_copy[i] = get_next_line(info->fd);
 	if (!is_valid_map(info, 0, 0, 0))
 		return (ft_free_info(info));
 	if (!path_ok(info->path_start[0], info->path_start[1], &info->coin, info))
