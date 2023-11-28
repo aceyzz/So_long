@@ -23,6 +23,7 @@
 - [Structure du code](#structure-du-code)
 - [Compilation et exécution](#compilation-et-exécution)
 - [Captures d'écran](#captures-décran)
+- [Résultat](#résultat)
 - [Ressources](#ressources)
 
 <br>
@@ -114,6 +115,13 @@ make
 	<img src="git_utils/sc4.png" alt="lose screen">
 	<img src="git_utils/sc7.png" alt="map2">
 </div>
+
+<br>
+<br>
+
+## Résultat
+
+<img src="git_utils/grade.png" alt="grade" style="width: 25%">
 
 <br>
 <br>
