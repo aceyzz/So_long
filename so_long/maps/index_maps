@@ -29,6 +29,5 @@ No	Size	Collec		Exit		Ennemies		Valid
 10.	10*11		√		√			√				x		# INVALID EXTENSION
 11.	10*11		√		√			√				x		# WALL INCORRECT
 12.	10*11		√		√			√				x		# CHARACTER INCORRECT
-13.	10*11		√		√			√				x		# SIZE INCORRECT
 99.	10*11		x		x			x				x		# MAP DOES NOT EXISTS
 ------------------------------------------------------------------

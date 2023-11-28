@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 12:25:09 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:21 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:44:19 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ending_screen(t_game *game, int result)
 	print_final_score(game);
 }
 
-static void loading_screen(t_game *game)
+static void	loading_screen(t_game *game)
 {
 	game->size = 100;
 	if (game->x < game->y && game->x > 100)

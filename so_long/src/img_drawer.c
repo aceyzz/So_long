@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:33:38 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:26 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:44:03 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	draw_else(t_game *game, int i, int j)
 			(j * 100), (i * 100));
 	if (game->map[i][j] == EXIT)
 		mlx_put_image_to_window(game->mlx, game->win, game->img_excl,
-		(j * 100), (i * 100));
+			(j * 100), (i * 100));
 	if (game->map[i][j] == EXIT_OK)
 		mlx_put_image_to_window(game->mlx, game->win, game->img_exop,
 			(j * 100), (i * 100));
