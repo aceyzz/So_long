@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:05:07 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/27 17:14:56 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/28 09:39:52 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	handle_keypress(int keycode, t_game *game)
 {
 	if (keycode == KEY_ENTER && game->started == 0 && game->finished == 0)
 	{
-		mlx_destroy_image(game->mlx, game->img);
+		mlx_destroy_image(game->mlx, game->img_load);
 		mlx_clear_window(game->mlx, game->win);
 		game->started = 1;
 		draw_map(game, 'Q');

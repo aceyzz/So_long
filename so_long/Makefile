@@ -6,7 +6,7 @@
 #    By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/21 08:25:32 by cedmulle          #+#    #+#              #
-#    Updated: 2023/11/27 16:29:51 by cedmulle         ###   ########.fr        #
+#    Updated: 2023/11/28 10:00:02 by cedmulle         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,7 @@ $(OBJ_DIR)ft_printf/%.o:	$(PF_DIR)%.c
 				@mkdir -p $(@D)
 				@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-# Création des fichiers objets printf ---------------------------------------- #
+# Création des fichiers objets GNL ------------------------------------------- #
 $(OBJ_DIR)get_next_line/%.o:	$(GL_DIR)%.c 
 				@mkdir -p $(@D)
 				@$(CC) $(CFLAGS) $(INC) -c $< -o $@

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawing.c                                          :+:      :+:    :+:   */
+/*   img_drawer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 11:33:38 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/26 14:55:54 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:08:26 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,64 +17,57 @@ static void	draw_board(t_game *game)
 	draw_move_board(game);
 	draw_coin_board(game);
 	draw_coin_board_max(game);
-	game->img = mlx_xpm_file_to_image(game->mlx, "./img/board.xpm",
-			&(game->size), &(game->size));
-	mlx_put_image_to_window(game->mlx, game->win, game->img,
+	mlx_put_image_to_window(game->mlx, game->win, game->img_boar,
 		(game->x * 100), 0);
 }
 
 static void	draw_killer(t_game *game, int i, int j, int color)
 {
 	if (color == 0)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/killer1.xpm",
-				&game->size, &game->size);
+		mlx_put_image_to_window(game->mlx, game->win, game->img_kil1,
+			(j * 100), (i * 100));
 	else if (color == 1)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/killer2.xpm",
-				&game->size, &game->size);
+		mlx_put_image_to_window(game->mlx, game->win, game->img_kil2,
+			(j * 100), (i * 100));
 	else if (color == 2)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/killer3.xpm",
-				&game->size, &game->size);
-	mlx_put_image_to_window(game->mlx, game->win, game->img,
-		(j * 100), (i * 100));
+		mlx_put_image_to_window(game->mlx, game->win, game->img_kil3,
+			(j * 100), (i * 100));
 }
 
 static void	draw_else(t_game *game, int i, int j)
 {
 	if (game->map[i][j] == ITEM)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/coin.xpm",
-				&game->size, &game->size);
+		mlx_put_image_to_window(game->mlx, game->win, game->img_item,
+			(j * 100), (i * 100));
 	if (game->map[i][j] == FLOOR)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/floor.xpm",
-				&game->size, &game->size);
+		mlx_put_image_to_window(game->mlx, game->win, game->img_floo,
+			(j * 100), (i * 100));
 	if (game->map[i][j] == WALL)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/wall.xpm",
-				&game->size, &game->size);
+		mlx_put_image_to_window(game->mlx, game->win, game->img_wall,
+			(j * 100), (i * 100));
 	if (game->map[i][j] == EXIT)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/exit_closed.xpm",
-				&game->size, &game->size);
-	if (game->map[i][j] == EXIT_OK)
-		game->img = mlx_xpm_file_to_image(game->mlx, "./img/exit_open.xpm",
-				&game->size, &game->size);
-	mlx_put_image_to_window(game->mlx, game->win, game->img,
+		mlx_put_image_to_window(game->mlx, game->win, game->img_excl,
 		(j * 100), (i * 100));
+	if (game->map[i][j] == EXIT_OK)
+		mlx_put_image_to_window(game->mlx, game->win, game->img_exop,
+			(j * 100), (i * 100));
+	return ;
 }
 
 static void	draw_player(t_game *game, int i, int j, char direction)
 {
-	char	*player_image;
-
 	if (direction == 'U')
-		player_image = "img/pl_up.xpm";
+		mlx_put_image_to_window(game->mlx, game->win, game->img_plup,
+			(j * 100), (i * 100));
 	else if (direction == 'L')
-		player_image = "img/pl_left.xpm";
+		mlx_put_image_to_window(game->mlx, game->win, game->img_plle,
+			(j * 100), (i * 100));
 	else if (direction == 'D')
-		player_image = "img/pl_down.xpm";
+		mlx_put_image_to_window(game->mlx, game->win, game->img_pldo,
+			(j * 100), (i * 100));
 	else
-		player_image = "img/pl_right.xpm";
-	game->img = mlx_xpm_file_to_image(game->mlx, player_image,
-			&game->size, &game->size);
-	mlx_put_image_to_window(game->mlx, game->win, game->img,
-		(j * 100), (i * 100));
+		mlx_put_image_to_window(game->mlx, game->win, game->img_plri,
+			(j * 100), (i * 100));
 }
 
 void	draw_map(t_game *game, char direction)

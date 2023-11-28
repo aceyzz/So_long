@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/27 17:17:29 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:05:33 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,22 @@ typedef struct s_game
 	int		finished;
 	int		nb_killers;
 	int		**tab_killers;
+	void	*img_plup;
+	void	*img_pldo;
+	void	*img_plri;
+	void	*img_plle;
+	void	*img_kil1;
+	void	*img_kil2;
+	void	*img_kil3;
+	void	*img_floo;
+	void	*img_wall;
+	void	*img_item;
+	void	*img_exop;
+	void	*img_excl;
+	void	*img_boar;
+	void	*img_swin;
+	void	*img_lose;
+	void	*img_load;
 }				t_game;
 
 int		parse_map(t_game *info);
@@ -101,6 +117,8 @@ void	draw_coin_board_max(t_game *game);
 void	print_final_score(t_game *game);
 void	create_tab_killers(t_game *game);
 void	move_all_killers(t_game *game);
+void	images_cleaner(t_game *game);
+void	set_images(t_game *game);
 
 #endif
 
