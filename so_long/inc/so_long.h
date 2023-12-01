@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:18:56 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/29 21:44:39 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:40:57 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	draw_coin_board_max(t_game *game);
 void	print_final_score(t_game *game);
 void	create_tab_killers(t_game *game);
 void	move_all_killers(t_game *game);
+void	free_killers(t_game *game);
 void	images_cleaner(t_game *game);
 void	set_images(t_game *game);
 

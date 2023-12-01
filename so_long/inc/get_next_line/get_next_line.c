@@ -6,14 +6,14 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 13:09:13 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/22 17:16:23 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:23:31 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 16
+# define BUFFER_SIZE 100
 #endif
 
 char	*line_reader(int fd, char *line)

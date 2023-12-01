@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 08:23:02 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:15 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:26:24 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 	if (argc == 2)
 	{
 		if (!init_args(&info, argv[1]) || !parse_map(&info))
-			return (1);
+			return (1 + ft_free_info(&info));
 		launch_screen(&info);
 	}
 	else

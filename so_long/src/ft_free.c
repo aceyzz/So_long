@@ -6,7 +6,7 @@
 /*   By: cedmulle <cedmulle@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:54:38 by cedmulle          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:29 by cedmulle         ###   ########.fr       */
+/*   Updated: 2023/12/01 14:40:13 by cedmulle         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,9 @@ static void	free_tab(char **tab)
 		i++;
 	}
 	free(tab);
-	tab = NULL;
 }
 
-static void	free_killers(t_game *game)
+void	free_killers(t_game *game)
 {
 	int	i;
 
