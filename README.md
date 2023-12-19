@@ -1,17 +1,11 @@
-<img src="git_utils/SO_LONG.png" alt="logo-so_long" style="width: 100%">
+<img src="git_utils/sl_banner.png" alt="logo-so_long" style="width: 100%">
+<img src="git_utils/sl_logo.png" alt="logo-so_long" style="width: 100%">
 
-<br>
-<br>
-<br>
-
-> Not the best way, but it works !
-
-<br>
 <br>
 
 # So_Long
 
-- Un projet de jeu 2D simple en C
+- Un projet de jeu 2D simple en C, à l'aide la lib. Minilibx de 42.
 
 ## Index 
 - [Introduction](#introduction)
