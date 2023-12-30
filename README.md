@@ -404,7 +404,7 @@ Documentation [MinilibX](https://harm-smits.github.io/42docs/libs/minilibx/getti
 <br>
 
 ## Licence
-[Licence](./LICENSE)
+This work is published under the terms of **[42 Unlicense](./LICENSE)**.
 
 
 >DON'T COPY, LEARN. RTFM.
