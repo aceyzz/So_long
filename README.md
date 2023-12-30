@@ -403,5 +403,8 @@ Documentation [MinilibX](https://harm-smits.github.io/42docs/libs/minilibx/getti
 <br>
 <br>
 
+## Licence
+[Licence](./LICENSE)
+
 
 >DON'T COPY, LEARN. RTFM.
