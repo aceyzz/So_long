@@ -1,11 +1,13 @@
-<img src="git_utils/sl_banner.png" alt="logo-so_long" style="width: 100%">
-<img src="git_utils/sl_logo.png" alt="logo-so_long" style="width: 100%">
+<img src="git_utils/banner.png" alt="logo-so_long" style="width: 100%">
 
 <br>
 
-# So_Long
+---
 
-- Un projet de jeu 2D simple en C, à l'aide la lib. Minilibx de 42.
+<br>
+
+<details>
+<summary>FRENCH VERSION</summary>
 
 ## Index 
 - [Introduction](#introduction)
@@ -79,9 +81,31 @@ Touche ESC : Quitter le jeu.
 ## Structure du code
 Le projet est structuré comme suit :
 
-- Fichier d'en-tête (so_long.h) : Contient les prototypes de fonctions, les macros et la définition de la structure du jeu.
-- Fichiers source : Code modulaire avec des fichiers séparés pour l'analyse, le dessin, la gestion des événements clés et la logique du jeu.
-- Bibliothèque MinilibX : Utilisée pour le rendu graphique.
+```shell
+├── Makefile                # Script de compilation
+├── img                     # Images du jeu
+│   ├── *.xpm               # Images en .xpm
+├── inc                     # En-têtes et bibliothèques
+│   ├── ft_printf           # Implémentation de printf
+│   ├── get_next_line       # Lecture ligne par ligne
+│   ├── mlx                 # Bibliothèque graphique MiniLibX
+│   └── so_long.h           # En-tête principal du projet
+├── maps                    # Cartes du jeu
+│   ├── index_maps          # Index des cartes
+│   ├── *.ber               # Carte au format ber
+└── src                     # Code source
+	├── ft_free.c           # Libération mémoire
+	├── ft_utils.c          # Fonctions utilitaires
+	├── img_board.c         # Affichage du tableau
+	├── img_drawer.c        # Dessin de la carte
+	├── img_handler.c       # Gestion des images
+	├── keypress.c          # Gestion des touches
+	├── main.c              # Point d'entrée du programme
+	├── map_parser.c        # Analyse des cartes
+	├── move_killers.c      # Déplacement des ennemis
+	├── move_player.c       # Déplacement du joueur
+	└── win_creator.c       # Gestion des écrans finaux
+```
 
 <br>
 <br>
@@ -90,59 +114,40 @@ Le projet est structuré comme suit :
 
 ### Structure ```t_game```
 
-```
+```c
 typedef struct s_game
 {
-	int		fd;                 // File descriptor for the map file
-	char	**map;              // 2D array representing the game map
-	char	**map_copy;         // Copy of the game map
-	char	*name_map;          // Name of the map file
-	int		x;                  // Width of the game map
-	int		y;                  // Height of the game map
-	int		pl_x;               // Player's current x-coordinate
-	int		pl_y;               // Player's current y-coordinate
-	int		exit_x;             // Exit's x-coordinate
-	int		exit_y;             // Exit's y-coordinate
-	int		path_start[2];      // Starting point of the pathfinding algorithm
-	int		path_end[2];        // Ending point of the pathfinding algorithm
-	int		max_coin;           // Maximum number of coins in the game
-	int		coin;               // Current number of coins in the game
-	int		coin_collected;     // Number of coins collected by the player
-	int		started;            // Flag indicating if the game has started
-	void	*mlx;               // Pointer to the MLX structure
-	void	*win;               // Pointer to the game window
-	void	*img;               // Pointer to the game image
-	int		*addr;              // Address of the game image data
-	int		bpp;                // Number of bits per pixel
-	int		line_len;           // Length of each image line in bytes
-	int		endian;             // Endianness of the image data
-	int		size;               // Size of the game image in bytes
-	int		window_width;       // Width of the game window
-	int		window_height;      // Height of the game window
-	int		image_width;        // Width of the game image
-	int		image_height;       // Height of the game image
-	int		x_offset;           // X-offset for rendering the game image
-	int		y_offset;           // Y-offset for rendering the game image
-	int		moves;              // Number of moves made by the player
-	int		finished;           // Flag indicating if the game has finished
-	int		nb_killers;         // Number of killer enemies in the game
-	int		**tab_killers;      // 2D array representing the killer enemies
-	void	*img_plup;          // Pointer to the player's image facing up
-	void	*img_pldo;          // Pointer to the player's image facing down
-	void	*img_plri;          // Pointer to the player's image facing right
-	void	*img_plle;          // Pointer to the player's image facing left
-	void	*img_kil1;          // Pointer to the killer enemy's image variant 1
-	void	*img_kil2;          // Pointer to the killer enemy's image variant 2
-	void	*img_kil3;          // Pointer to the killer enemy's image variant 3
-	void	*img_floo;          // Pointer to the floor tile image
-	void	*img_wall;          // Pointer to the wall tile image
-	void	*img_item;          // Pointer to the coin item image
-	void	*img_exop;          // Pointer to the exit open image
-	void	*img_excl;          // Pointer to the exit closed image
-	void	*img_boar;          // Pointer to the game over board image
-	void	*img_swin;          // Pointer to the game win board image
-	void	*img_lose;          // Pointer to the game lose board image
-	void	*img_load;          // Pointer to the loading screen image
+	int		fd;                     // Fichier de la carte
+	char	**map;                  // Carte du jeu
+	char	**map_copy;             // Copie de la carte
+	char	*name_map;              // Nom de la carte
+	int		x, y;                   // Dimensions de la carte
+	int		pl_x, pl_y;             // Position du joueur
+	int		exit_x, exit_y;         // Position de la sortie
+	int		path_start[2];          // Départ chemin
+	int		path_end[2];            // Arrivée chemin
+	int		max_coin;               // Total pièces
+	int		coin;                   // Pièces actuelles
+	int		coin_collected;         // Pièces collectées
+	int		started;                // Jeu commencé
+	void	*mlx, *win;             // MLX et fenêtre
+	void	*img;                   // Image du jeu
+	int		*addr;                  // Données image
+	int		bpp, line_len;          // Bits/pixel, longueur ligne
+	int		endian;                 // Endianness
+	int		size;                   // Taille image
+	int		window_width, window_height; // Dimensions fenêtre
+	int		image_width, image_height;   // Dimensions image
+	int		x_offset, y_offset;     // Décalage image
+	int		moves;                  // Déplacements
+	int		finished;               // Jeu terminé
+	int		nb_killers;             // Nombre d'ennemis
+	int		**tab_killers;          // Tableau ennemis
+	void	*img_plup, *img_pldo, *img_plri, *img_plle; // Images joueur
+	void	*img_kil1, *img_kil2, *img_kil3;           // Images ennemis
+	void	*img_floo, *img_wall, *img_item;           // Images tuiles
+	void	*img_exop, *img_excl;                      // Images sortie
+	void	*img_boar, *img_swin, *img_lose, *img_load; // Images fin/chargement
 } 				t_game;
 ```
 
@@ -154,21 +159,21 @@ typedef struct s_game
 ### Fichiers sources
 
 - ft_free.c
-```
+```c
 static void free_tab(char **tab);
 static void free_killers(t_game *game);		
 int ft_free_info(t_game *info);
 ```
 
 - ft_utils.c
-```
+```c
 char *ft_itoa(int nb);
 int ft_error(int error);
 void create_tab_killers(t_game *game);
 ```
 
 - img_board.c
-```
+```c
 void print_final_score(t_game *game);
 void draw_move_board(t_game *game);
 void draw_coin_board(t_game *game);
@@ -176,29 +181,29 @@ void draw_coin_board_max(t_game *game);
 ```
 
 - img_drawer.c
-```
+```c
 void draw_map(t_game *game, char direction);
 ```
 
 - img_handler.c
-```
+```c
 void set_images(t_game *game);
 void images_cleaner(t_game *game);
 ```
 
 - keypress.c
-```
+```c
 int handle_keypress(int keycode, t_game *game);
 ```
 
 - main.c
-```
+```c
 static int init_args(t_game *info, char *av);
 int main(int argc, char *argv[]);
 ```
 
 - map_parser.c
-```
+```c
 static int get_size(t_game *info);
 static int is_valid_charac(t_game *info, int i, int j);
 static int is_valid_map(t_game *info, int p, int c, int e);
@@ -207,17 +212,17 @@ int parse_map(t_game *info);
 ```
 
 - move_killers.c
-```
+```c
 void move_all_killers(t_game *game);
 ```
 
 - move_player.c
-```
+```c
 void move_player(int keycode, t_game *game);
 ```
 
 - win_creator.c
-```
+```c
 static void ending_screen(t_game *game, int result);
 static void loading_screen(t_game *game);
 void finish_game(t_game *game, int result);
@@ -230,55 +235,55 @@ void launch_screen(t_game *game);
 
 
 ### Fonctions de la Minilibx utilisées
-```
+```c
 mlx_init():
 ```
 Initialise une connexion avec le serveur graphique X.
 Alloue la mémoire nécessaire et initialise une structure qui stocke des informations sur la connexion graphique.
 
-```
+```c
 mlx_new_window():
 ```
 Crée une nouvelle fenêtre graphique.
 Prend comme paramètres la connexion graphique initialisée avec mlx_init(), les dimensions de la fenêtre, et le titre de la fenêtre. Retourne un identifiant unique pour la fenêtre.
 
-```
+```c
 mlx_new_image():
 ```
 Crée une nouvelle image en mémoire.
 Prend comme paramètres la connexion graphique et les dimensions de l'image. Retourne un identifiant unique pour l'image.
 
-```
+```c
 mlx_get_data_addr():
 ```
 Obtient l'adresse du premier octet de l'image.
 Prend comme paramètres l'identifiant de l'image, un pointeur vers la variable qui stockera l'adresse, et des variables pour les informations sur la largeur, la hauteur, et les bits par pixel.
 
-```
+```c
 mlx_hook():
 ```
 Associe une fonction à un événement, comme une touche pressée.
 Prend comme paramètres l'identifiant de la fenêtre, le type d'événement, une fonction à appeler, et un paramètre qui sera passé à la fonction.
 
-```
+```c
 mlx_put_image_to_window():
 ```
 Affiche une image dans une fenêtre.
 Prend comme paramètres la connexion graphique, l'identifiant de la fenêtre, l'identifiant de l'image, et les coordonnées où afficher l'image.
 
-```
+```c
 mlx_destroy_image():
 ```
 Détruit une image précédemment créée.
 Prend comme paramètres la connexion graphique et l'identifiant de l'image à détruire.
 
-```
+```c
 mlx_destroy_window():
 ```
 Ferme une fenêtre graphique.
 Prend comme paramètres la connexion graphique et l'identifiant de la fenêtre à fermer.
 
-```
+```c
 mlx_loop():
 ```
 Lance la boucle principale de gestion des événements graphiques.
@@ -360,7 +365,7 @@ Le programme utilise la MiniLibX pour la gestion graphique, ce qui implique des 
 ## Compilation et exécution
 Pour compiler le projet, exécutez les commandes suivantes :
 
-```
+```bash
 git clone https://github.com/aceyzz/So_long.git
 cd So_long/so_long
 make
@@ -408,3 +413,425 @@ This work is published under the terms of **[42 Unlicense](./LICENSE)**.
 
 
 >DON'T COPY, LEARN. RTFM.
+
+</details>
+
+<br>
+
+---
+
+<br>
+
+<details>
+<summary>ENGLISH VERSION</summary>
+
+## Index 
+- [Introduction](#introduction)
+- [Objective](#objective)
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [Game Elements](#game-elements)
+- [Controls](#controls)
+- [Code Structure](#code-structure)
+- [In Detail](#in-detail)
+	- [Structure](#structure-t_game)
+	- [Source Files](#source-files)
+	- [Minilibx Functions](#minilibx-functions-used)
+	- [Process](#process)
+- [Compilation and Execution](#compilation-and-execution)
+- [Screenshots](#screenshots)
+- [Result](#result)
+- [Resources](#resources)
+
+<br>
+
+## Introduction
+Welcome to So_Long, a 2D game project developed in C as part of a programming learning program. This project focuses on creating a simple game using the MinilibX graphics library. The goal is to build a game where a player moves through a map, collects items, avoids obstacles, and reaches the exit.
+
+<br>
+<br>
+
+## Objective
+The main objective of the So_Long project is to implement a basic game using C and the MinilibX library. The game involves handling user input, rendering graphics, and managing game elements such as the player, items, obstacles, and the exit.
+
+<br>
+<br>
+
+## Project Overview
+So_Long is a maze-based game where the player moves through a map represented by a grid. The map contains various elements, including the player, collectible items, obstacles, and an exit. The player's task is to collect all items and reach the exit while avoiding obstacles.
+
+<br>
+<br>
+
+## Key Features
+- **Player Movement**: Use arrow keys (up, down, left, right) to move the player.
+- **Item Collection**: Collect items represented by specific symbols on the map.
+- **Exit**: Reach the exit to complete the game.
+- **Obstacle Avoidance**: Navigate around obstacles represented by specific symbols.
+- **Graphics**: Simple 2D graphics implemented using the MinilibX library.
+
+<br>
+<br>
+
+## Game Elements
+The game includes the following elements:
+
+- **Player (P)**: The main character controlled by the player.
+- **Item (C)**: Collectible items the player must gather.
+- **Killer (x)**: Obstacles the player must avoid.
+- **Wall (1)**: Solid walls that restrict movement.
+- **Floor (0)**: Open spaces where the player can move.
+- **Exit (E)**: The player's goal.
+
+<br>
+<br>
+
+## Controls
+- **Arrow Keys**: Move the player in the corresponding direction.
+- **W, A, S, D**: Alternative keys for movement (up, left, down, right).
+- **ESC Key**: Exit the game.
+
+<br>
+<br>
+
+## Code Structure
+The project is structured as follows:
+
+```shell
+├── Makefile                # Compilation script
+├── img                     # Game images
+│   ├── *.xpm               # Images in .xpm format
+├── inc                     # Headers and libraries
+│   ├── ft_printf           # printf implementation
+│   ├── get_next_line       # Line-by-line reading
+│   ├── mlx                 # MiniLibX graphics library
+│   └── so_long.h           # Main project header
+├── maps                    # Game maps
+│   ├── index_maps          # Map index
+│   ├── *.ber               # Maps in .ber format
+└── src                     # Source code
+	├── ft_free.c           # Memory management
+	├── ft_utils.c          # Utility functions
+	├── img_board.c         # Board display
+	├── img_drawer.c        # Map drawing
+	├── img_handler.c       # Image management
+	├── keypress.c          # Key handling
+	├── main.c              # Program entry point
+	├── map_parser.c        # Map parsing
+	├── move_killers.c      # Enemy movement
+	├── move_player.c       # Player movement
+	└── win_creator.c       # End screen management
+```
+
+<br>
+<br>
+
+## In Detail
+
+### Structure ```t_game```
+
+```c
+typedef struct s_game
+{
+	int		fd;                     // Map file
+	char	**map;                  // Game map
+	char	**map_copy;             // Map copy
+	char	*name_map;              // Map name
+	int		x, y;                   // Map dimensions
+	int		pl_x, pl_y;             // Player position
+	int		exit_x, exit_y;         // Exit position
+	int		path_start[2];          // Path start
+	int		path_end[2];            // Path end
+	int		max_coin;               // Total coins
+	int		coin;                   // Current coins
+	int		coin_collected;         // Collected coins
+	int		started;                // Game started
+	void	*mlx, *win;             // MLX and window
+	void	*img;                   // Game image
+	int		*addr;                  // Image data
+	int		bpp, line_len;          // Bits/pixel, line length
+	int		endian;                 // Endianness
+	int		size;                   // Image size
+	int		window_width, window_height; // Window dimensions
+	int		image_width, image_height;   // Image dimensions
+	int		x_offset, y_offset;     // Image offset
+	int		moves;                  // Moves
+	int		finished;               // Game finished
+	int		nb_killers;             // Number of enemies
+	int		**tab_killers;          // Enemy table
+	void	*img_plup, *img_pldo, *img_plri, *img_plle; // Player images
+	void	*img_kil1, *img_kil2, *img_kil3;           // Enemy images
+	void	*img_floo, *img_wall, *img_item;           // Tile images
+	void	*img_exop, *img_excl;                      // Exit images
+	void	*img_boar, *img_swin, *img_lose, *img_load; // End/loading images
+} 				t_game;
+```
+
+<br>
+<br>
+
+---
+
+### Source Files
+
+- ft_free.c
+```c
+static void free_tab(char **tab);
+static void free_killers(t_game *game);		
+int ft_free_info(t_game *info);
+```
+
+- ft_utils.c
+```c
+char *ft_itoa(int nb);
+int ft_error(int error);
+void create_tab_killers(t_game *game);
+```
+
+- img_board.c
+```c
+void print_final_score(t_game *game);
+void draw_move_board(t_game *game);
+void draw_coin_board(t_game *game);
+void draw_coin_board_max(t_game *game);
+```
+
+- img_drawer.c
+```c
+void draw_map(t_game *game, char direction);
+```
+
+- img_handler.c
+```c
+void set_images(t_game *game);
+void images_cleaner(t_game *game);
+```
+
+- keypress.c
+```c
+int handle_keypress(int keycode, t_game *game);
+```
+
+- main.c
+```c
+static int init_args(t_game *info, char *av);
+int main(int argc, char *argv[]);
+```
+
+- map_parser.c
+```c
+static int get_size(t_game *info);
+static int is_valid_charac(t_game *info, int i, int j);
+static int is_valid_map(t_game *info, int p, int c, int e);
+static int path_ok(int y, int x, int *coin, t_game *info);
+int parse_map(t_game *info);
+```
+
+- move_killers.c
+```c
+void move_all_killers(t_game *game);
+```
+
+- move_player.c
+```c
+void move_player(int keycode, t_game *game);
+```
+
+- win_creator.c
+```c
+static void ending_screen(t_game *game, int result);
+static void loading_screen(t_game *game);
+void finish_game(t_game *game, int result);
+void launch_screen(t_game *game);
+```
+
+<br>
+
+---
+
+### Minilibx Functions Used
+```c
+mlx_init():
+```
+Initializes a connection with the X graphics server.
+Allocates memory and initializes a structure to store graphics connection information.
+
+```c
+mlx_new_window():
+```
+Creates a new graphics window.
+Takes parameters for the graphics connection initialized with mlx_init(), window dimensions, and the window title. Returns a unique identifier for the window.
+
+```c
+mlx_new_image():
+```
+Creates a new image in memory.
+Takes parameters for the graphics connection and image dimensions. Returns a unique identifier for the image.
+
+```c
+mlx_get_data_addr():
+```
+Gets the address of the first byte of the image.
+Takes parameters for the image identifier, a pointer to store the address, and variables for width, height, and bits per pixel.
+
+```c
+mlx_hook():
+```
+Associates a function with an event, such as a key press.
+Takes parameters for the window identifier, event type, a function to call, and a parameter to pass to the function.
+
+```c
+mlx_put_image_to_window():
+```
+Displays an image in a window.
+Takes parameters for the graphics connection, window identifier, image identifier, and coordinates to display the image.
+
+```c
+mlx_destroy_image():
+```
+Destroys a previously created image.
+Takes parameters for the graphics connection and the image identifier to destroy.
+
+```c
+mlx_destroy_window():
+```
+Closes a graphics window.
+Takes parameters for the graphics connection and the window identifier to close.
+
+```c
+mlx_loop():
+```
+Starts the main loop for handling graphics events.
+An infinite loop that handles events such as key presses.
+
+<br>
+<br>
+
+---
+
+### Process
+
+1. **Library Inclusions**  
+The program uses several standard libraries such as ```<unistd.h>```, ```<stdlib.h>```, ```<fcntl.h>```, ```<math.h>```, as well as third-party libraries like ```"get_next_line/get_next_line.h"```, ```"ft_printf/ft_printf.h"```, and ```"../inc/mlx/mlx.h"```. These inclusions provide basic functionality, input/output, math functions, and tools for the graphical interface with MiniLibX.
+
+<br>
+
+2. **Constant Definitions**  
+The header file defines a set of constants representing different game elements, such as the player, items, walls, floor, exit, etc. These constants improve code readability by replacing numeric values with meaningful names.
+
+<br>
+
+3. **Data Structure**  
+The program uses a structure called ```t_game``` to store various information about the game's state. This structure contains members such as arrays for storing the game map, variables for tracking the player's position, counters for collected items, graphics interface handlers (MiniLibX), and other game-related information.
+
+<br>
+
+4. **Key Handling**  
+The ```handle_keypress``` function is called in response to a key press. It processes keyboard events, triggers actions based on the pressed key, and updates the game's state accordingly.
+
+<br>
+
+5. **Map Parsing**  
+The ```parse_map``` function is responsible for parsing the game map from a file. It extracts the necessary information and initializes the ```t_game``` structure accordingly.
+
+<br>
+
+6. **Graphics Initialization**  
+The ```launch_screen``` function initializes the graphical interface using MiniLibX. It creates the window, loads the necessary images, and prepares the initial game board.
+
+<br>
+
+7. **Main Game Loop**  
+The main game loop handles the game's progression. It monitors events (including key presses), updates the game's state, draws the map, and reacts to the player's actions.
+
+<br>
+
+8. **Player Movement**  
+The ```move_player``` function is called to move the player based on the pressed key. It checks the validity of the movement, updates the player's coordinates, and performs other necessary actions.
+
+<br>
+
+9. **Enemy Management**  
+The program includes a ```move_all_killers``` function to move enemies (referred to as "killers") on the map.
+
+<br>
+
+10. **Display Management**  
+Several functions are dedicated to display management, including the ```draw_map``` function, which draws the game map (see drawing.c file).
+
+<br>
+
+11. **Memory Management**  
+The ```ft_free.c``` file contains functions to free dynamically allocated memory during the program's execution, ensuring clean resource management.
+
+<br>
+
+12. **Game End**  
+The ```finish_game``` function handles the end of the game, indicating whether the player has won or lost.
+
+<br>
+
+13. **Graphical Details**  
+The program uses MiniLibX for graphical management, involving image manipulations and window operations.
+
+<br>
+<br>
+
+## Compilation and Execution
+To compile the project, run the following commands:
+
+```bash
+git clone https://github.com/aceyzz/So_long.git
+cd So_long/so_long
+make
+./so_long "maps/example_map.ber"
+```
+
+*Note: Replace "example_map.ber" with the path to your desired map file. (see so_long/maps/index_maps file)*
+
+<br>
+<br>
+
+## Screenshots
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+	<img src="git_utils/sc1.png" alt="term">
+	<img src="git_utils/sc2.png" alt="loading screen">
+	<img src="git_utils/sc3.png" alt="map1">
+	<div style="display: grid; grid-template-columns: repeat(1, 2fr); gap: 10px;">
+		<img src="git_utils/sc5.png" alt="map2">
+		<img src="git_utils/sc6.png" alt="map2">
+	</div>
+	<img src="git_utils/sc4.png" alt="lose screen">
+	<img src="git_utils/sc7.png" alt="map2">
+</div>
+
+<br>
+<br>
+
+## Result
+
+<img src="git_utils/grade.png" alt="grade" style="width: 25%">
+
+<br>
+<br>
+
+## Resources
+Documentation [MinilibX](https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html)
+
+<br>
+<br>
+<br>
+
+## License
+This work is published under the terms of **[42 Unlicense](./LICENSE)**.
+
+
+>DON'T COPY, LEARN. RTFM.
+
+</details>
+
+<br>
+
+---
+<br>
